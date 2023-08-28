@@ -26,7 +26,9 @@ public class MyTracer {
 	
 	public void trace(Supplier<String> supp) {
 		if(level == Level.TRACE) {
-			System.out.println(supp.get());
+			//System.out.println(supp.get());
+			String message = supp.get();
+			System.out.println(message);
 		}
 	}
 
@@ -36,6 +38,7 @@ public class MyTracer {
 		
 		public void m(String[] args) {
 			tracer.trace(() -> "args length " + args.length);
+			
 		}
 	}
 
