@@ -40,7 +40,14 @@ public class OPtionalAPI {
 		maybeInt.ifPresent(value -> System.out.println("value " + value));
 		
 		maybeInt.ifPresent(System.out::print);
-		maybeInt.ifPresentOrElse(System.out::print);
+		maybeInt.ifPresentOrElse(System.out::print, new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 
 	}

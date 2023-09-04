@@ -25,9 +25,11 @@ public class TextStatistics {
 		Collection<Character> chars = stat.getUniqueChars();
 
 		System.out.println(chars);
+		
 		chars.forEach(System.out::print);
 		
 		System.out.println();
+		
 		for(char c : chars)
 			System.out.print(c + " ");
 
