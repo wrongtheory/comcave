@@ -37,23 +37,34 @@ public class AufgabeCollect2 {
 		    bestellungen.add(new Bestellung("Wurst", 1));
 		    bestellungen.add(new Bestellung("Milch", 2));
 		    
-		    List<Product> warenkorb2 =  buildWarenkorb1(bestellungen);
+		    //List<Product> warenkorb2 =  buildWarenkorb1(bestellungen);
 		    
 		   // System.out.print(warenkorb2);
 		    
-		   // buildWarenkorb1(bestellungen);
+		    buildWarenkorb1(bestellungen);
 		    //buildWarenkorb2(bestellungen);
 		    
-		    buildWarenkorb3(bestellungen);
+		    //buildWarenkorb3(bestellungen);
+		    
+		    int ges = warenkorb.stream()
+		    	.map(x -> x.getPreis())
+		    	.reduce(0, (a,b) -> a + b);
 
+		    System.out.println("ges: " + ges);
+		    
+		    
 	}
 	
 	static List<Product> buildWarenkorb1(List<Bestellung> bestellungs) {
 		    
 	BiConsumer<List<Product>, Bestellung> acc = (a,b) -> {
 		int price = new Random().nextInt(100,300);
-		for(int i=0;i<b.getAnzahl();i++)
-			a.add(new Product(b.getProductName(), price));
+//		for(int i=0;i<b.getAnzahl();i++)
+//			a.add(new Product(b.getProductName(), price));
+		
+		Stream.generate(()->new Product(b.getProductName(), price))
+			.limit(b.getAnzahl())
+			.collect(Collectors.toList());
 	};
 	
 	List<Product> lis1 =  bestellungs.stream()

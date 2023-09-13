@@ -78,9 +78,6 @@ public class AufgabeCollect {
 		/*
 		 * Version2 <R, A> R collect(Collector<? super T, A, R> collector);
 		 */
-
-		Collector<Integer, ?, List<Integer>> c1;
-
 		List<Integer> list2 = Arrays.stream(arr)
 				.flatMap(x -> Stream.of(x.split(",")))
 				.map(x -> Integer.valueOf(x))
@@ -173,7 +170,15 @@ public class AufgabeCollect {
 				.collect(Collectors.mapping(x -> Integer.valueOf(x), Collectors.toList()));
 
 		System.out.println(list6);
+		
+		List<Object> ll =  Arrays.stream(arr)
+			.collect(Collectors.mapping(x->x.split(","), Collectors.toList()))
+			.stream()
+			.collect(Collectors.flatMapping(x->Stream.of(x) , Collectors.toList()));
+					
 
+		System.out.println("ll: " + ll);
+				
 	}
 
 	static void a2() {
@@ -182,7 +187,8 @@ public class AufgabeCollect {
 		List<Integer> list7 = Arrays.stream(arr)
 				.flatMap(x -> Stream.of(x.split(",")))
 				.map(x -> Integer.valueOf(x))
-				.filter(x -> x % 2 == 0).collect(Collectors.toCollection(ArrayList::new));
+				.filter(x -> x % 2 == 0)
+				.collect(Collectors.toCollection(ArrayList::new));
 
 		System.out.println(list7);
 
