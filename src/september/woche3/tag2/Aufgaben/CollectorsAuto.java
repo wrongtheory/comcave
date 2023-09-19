@@ -48,7 +48,7 @@ public class CollectorsAuto {
 		
 		Collector<String, ?, Set<String>> downstream = Collectors.toSet();
 		
-		Function<Auto, String> mapper = hersteller -> hersteller.getHersteller();
+		Function<Auto, String> mapper = Auto::getHersteller;
 		
 		Collector<Auto, ?, Set<String>> collector = Collectors.mapping(mapper, downstream);
 		
@@ -156,7 +156,7 @@ public class CollectorsAuto {
 		 */
 		
 		Map<Boolean, List<Auto>> map = autos.stream()
-				.collect(Collectors.partitioningBy(model -> model.getModell().contains("o"), Collectors.toList()));
+				.collect(Collectors.partitioningBy(model -> model.getModell().contains("o")));
 		
 		System.out.println(map); // {false=[Opel/Astra], true=[VW/Golf, VW/Polo, Opel/Corsa]}
 	}
@@ -164,10 +164,8 @@ public class CollectorsAuto {
 	private static void partitioningBy1_1(List<Auto> autos) {
 	
 		Predicate<Auto> predicate = a -> a.getModell().contains("o");
-		
-		Collector<Auto, ?, List<Auto>> downstream = Collectors.toList();
 
-		Collector<Auto, ?, Map<Boolean, List<Auto>>> collector = Collectors.partitioningBy(predicate, downstream);
+		Collector<Auto, ?, Map<Boolean, List<Auto>>> collector = Collectors.partitioningBy(predicate);
 		
 		Map<Boolean, List<Auto>> map = autos.stream()
 				.collect(collector);

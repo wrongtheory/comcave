@@ -2,11 +2,8 @@ package september.woche3.tag2.Aufgaben;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.DuplicateFormatFlagsException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -37,6 +34,7 @@ public class CollectorsPersonen {
 		a3mapping2(personen);
 		System.out.println("**********************A4******************************");
 		groupingnachBeruf(personen);
+		groupingnachBeruf2(personen);
 		System.out.println("**********************A5******************************");
 		partitioningByBauarbeiter(personen);
 
@@ -46,10 +44,12 @@ public class CollectorsPersonen {
 	}// end main
 	
 	private static void savePersoninTreeSet(Person[] personen) {
+		
+		Comparator<Person> comp = Comparator.comparing(Person::getName).thenComparing(Person::getBeruf);
 				
 		TreeSet<Person> pers = 
 				Stream.of(personen)
-				.collect(Collectors.toCollection(TreeSet::new));
+				.collect(Collectors.toCollection(() -> new TreeSet<>(comp)));
 		
 		pers.forEach(a -> System.out.println(a));
 		
@@ -58,8 +58,8 @@ public class CollectorsPersonen {
 	
 	private static void toMap(Person[] personen) {
 
-		Map<String, String> map = Stream.of(personen)
-				.collect(Collectors.toMap(Person::getName, Person::getBeruf));
+		Map<String, Person> map = Stream.of(personen)
+				.collect(Collectors.toMap(Person::getName, p -> p));
 		
 		map.forEach((a,b) -> System.out.println(a + " " + b));
 	}
@@ -106,10 +106,19 @@ public class CollectorsPersonen {
 		berufe.forEach((a,b) -> System.out.println(a + " : " +  b));
 	}
 	
+	private static void groupingnachBeruf2(Person[] personen) {
+		
+		Map<String, List<Person>> berufe = 
+				Arrays.stream(personen)
+				.collect(Collectors.groupingBy(Person::getBeruf, Collectors.toList()));
+		
+		berufe.forEach((a,b) -> System.out.println(a + " : " +  b));
+	}
+
 	private static void partitioningByBauarbeiter(Person[] personen) {
 		
 		Map<Boolean, List<Person>> bau = Arrays.stream(personen)
-				.collect(Collectors.partitioningBy(pers -> pers.getBeruf() == "Bauarbeiter(in)", Collectors.toList()));
+				.collect(Collectors.partitioningBy(pers -> pers.getBeruf().equals("Bauarbeiter(in)")));
 		
 		bau.forEach((a,b) -> System.out.println(a + " - " + b));
 		//System.out.println(bau);

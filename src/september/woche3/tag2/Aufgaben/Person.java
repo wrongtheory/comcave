@@ -2,7 +2,7 @@ package september.woche3.tag2.Aufgaben;
 
 import java.util.Comparator;
 
-public class Person implements Comparable<Person>{
+public class Person {
 
     private String name;
     private String beruf;
@@ -27,13 +27,9 @@ public class Person implements Comparable<Person>{
 
 
 
-	Comparator<Person> comp = Comparator.comparing(Person::getName).thenComparing(Person::getBeruf);
+//	Comparator<Person> comp = Comparator.comparing(Person::getName).thenComparing(Person::getBeruf);
     
-	@Override
-	public int compareTo(Person o) {
-		// TODO Auto-generated method stub
-		return name.compareTo(o.name);
-	}
+
 
     
 }

@@ -87,7 +87,7 @@ public class Platzhalter {
 		coll.add(new Hund());
 		coll.add(new Wildhund());
 		//coll.add(new Katze()); // cf
-		coll.add(new Tier());
+		//coll.add(new Tier());
 		
 		Tier t = new Hund();
 		coll.add((Hund) t); //cf
