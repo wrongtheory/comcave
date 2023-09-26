@@ -46,7 +46,7 @@ public class WalkAufgabe {
 
 	public static void main(String[] args) throws IOException {
 		
-		Path path = Paths.get("/home/vleunti/FileTest");
+		Path path = Paths.get(".");
 		
 		printSubdirs(path);
 		System.out.println("---------------------------------");
