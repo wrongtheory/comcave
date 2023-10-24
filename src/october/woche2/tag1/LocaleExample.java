@@ -10,6 +10,7 @@ public class LocaleExample {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//Console
 		
 		
 		Locale loc = Locale.getDefault();

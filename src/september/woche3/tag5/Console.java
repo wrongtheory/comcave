@@ -10,6 +10,8 @@ public class Console {
 		java.io.Console c = System.console();
 		System.out.println(c);
 		
+		
+		
 		c.format("Heute ist %s!%n", "Freitag");
 		c.printf("Gestern war %s!%n", "Donnerstag");
 		
